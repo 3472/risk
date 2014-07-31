@@ -12,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +23,10 @@ import javax.swing.JLabel;
 import core.Spiel;
 import core.Fraktion;
 import core.Spieler;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JButton;
 
 public class Frame extends JFrame {
 
@@ -36,6 +40,8 @@ public class Frame extends JFrame {
 		private Spiel spiel;
 		private JMenuBar menuBar;
 		private JMenu mnStart;
+		private JButton beendenButton;
+		private JLabel lblNewLabel;
 
 		/**
 		 * Launch the application.
@@ -49,7 +55,7 @@ public class Frame extends JFrame {
 
 			String romText = "Rom: Punkte: ";
 			String karText = "Karthago: Punkte: ";
-			
+			lblNewLabel.setText("Aktueller Spieler: " + spiel.getAktuellerSpieler().toString());
 			brett.repaint();
 			super.paint(g);
 			/*rom.setText(romText + brett.getGraph().getScore(Owner.Rom));
@@ -124,12 +130,38 @@ public class Frame extends JFrame {
 			gbc_buttonPanel.gridy = 0;
 			contentPane.add(buttonPanel, gbc_buttonPanel);
 			buttonPanel.setLayout(new GridLayout(12, 0, 0, 0));
+			
+			beendenButton = new JButton("Zug beenden");
+			beendenButton.addActionListener(new ButtonListener());
+			buttonPanel.add(beendenButton);
+			
+			lblNewLabel = new JLabel("Aktueller Spieler");
+			buttonPanel.add(lblNewLabel);
 
 			this.setSize(1000, 600);
 			this.setVisible(true);
 			this.setAlwaysOnTop(true);
 
 		}
+		
+		public JButton getBeendenButton() {
+			return this.beendenButton;
+		}
+		
+		class ButtonListener implements ActionListener {
+			
+			 public void actionPerformed(ActionEvent e) {
+			        if(e.getSource() == beendenButton){
+			        	System.out.println("button clicked");
+			           spiel.getAktuellerSpieler().setZugZuende(true);
+			           lblNewLabel.setText("Aktueller Spieler: " + spiel.getAktuellerSpieler().toString());
+			           repaint();
+			        }
+			    } 
+		}
+		
+		
+		  
 
 	
 

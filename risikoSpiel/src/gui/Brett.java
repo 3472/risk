@@ -32,7 +32,7 @@ public class Brett extends JPanel {
 		private int boardOffset;
 		private int citySquareSize;
 		private Map<Integer, JButton> buttonMap;
-		private boolean waitForTurn = true;
+		private boolean waitForTurn = false;
 		private int clickedId = -1;
 		private boolean doneTurn = false;
 
@@ -178,13 +178,13 @@ public class Brett extends JPanel {
 		}
 
 		public int getID() {
-			System.out.println("test");
+			System.out.println("test2");
 			this.waitForTurn = true;
 			while (!doneTurn) {
 
 				try {
 					Thread.sleep(200);
-					System.out.println("waiting");
+					//System.out.println("waiting");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -17,12 +17,12 @@ public class LaenderGraph implements Iterable<Land> {
 		pfadList = new ArrayList<>();
 		laenderList = new VertexSet();
 
-		laenderList.addVertex(new Land(0, 150, 200, Fraktion.Blau, 2));
-		laenderList.addVertex(new Land(1, 400, 200, Fraktion.Rot, 10));
-		laenderList.addVertex(new Land(2, 200, 400, Fraktion.Blau, 0));
-		laenderList.addVertex(new Land(3, 600, 200, Fraktion.Blau, 0));
-		laenderList.addVertex(new Land(4, 400, 400, Fraktion.Blau, 0));
-		laenderList.addVertex(new Land(5, 650, 400, Fraktion.Rot, 0));
+		laenderList.addVertex(new Land(0, 150, 200, Fraktion.Grau, 2));
+		laenderList.addVertex(new Land(1, 400, 200, Fraktion.Grau, 10));
+		laenderList.addVertex(new Land(2, 200, 400, Fraktion.Grau, 0));
+		laenderList.addVertex(new Land(3, 600, 200, Fraktion.Grau, 0));
+		laenderList.addVertex(new Land(4, 400, 400, Fraktion.Grau, 0));
+		laenderList.addVertex(new Land(5, 650, 400, Fraktion.Grau, 0));
 
 		pfadList.add(new Pfad(laenderList.getLandByID(0), laenderList
 				.getLandByID(1)));
@@ -72,6 +72,20 @@ public class LaenderGraph implements Iterable<Land> {
 		} else {
 			return null;
 		}
+	}
+	
+	public int getAnzahlLaender(Fraktion f) {
+		
+		int res = 0;
+		
+		Iterator<Land> it = iterator();
+		
+		while(it.hasNext()) {
+			if(it.next().getOwner().equals(f)) {
+				res++;
+			}
+		}
+		return res;
 	}
 	
 	//public changeFraktionOfLand(Land land, Fraktion fraktion) {
